@@ -1,6 +1,6 @@
 {
   "version": "0.0.0",
-  "name": "share-config-template",
+  "name": "share-config-monorepo",
   "description": "Template for setting up a monorepo shares eslint and jest configrations",
   "private": true,
   "scripts": {
