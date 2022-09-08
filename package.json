@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "clean": "rm -rf node_modules **/*/node_modules",
-    "sync": "pnpm -C ./packages/sync-config sync && pnpm lint",
+    "sync": "pnpm -C ./packages/sync-config sync && pnpm lint && pnpm install",
     "lint": "prettier -c --write **/jest.config.js **/.eslintrc.js **/package.json",
     "test": "jest"
   },

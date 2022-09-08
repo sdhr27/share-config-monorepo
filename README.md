@@ -7,7 +7,7 @@ English | [简体中文](./README.zh-CN.md)
 ## 🚀 How to use?
 
 copy your repo into the packages directory.  
-Run pnpm sync && pnpm install.
+Run pnpm install & pnpm sync.
 
 ## 📒 notice
 

@@ -7,7 +7,7 @@
 ## 🚀 如何使用?
 
 将你的项目复制粘贴到 packages 目录下。  
-运行 pnpm sync && pnpm install.
+运行 pnpm install && pnpm sync.
 
 ## 📒 注意
 
