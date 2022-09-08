@@ -1,5 +1,7 @@
 {
   "version": "0.0.0",
+  "name": "configshare-monorepo",
+  "description": "Template for setting up a monorepo shares eslint and jest configrations",
   "private": true,
   "scripts": {
     "clean": "rm -rf node_modules **/*/node_modules",
