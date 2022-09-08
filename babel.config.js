@@ -1,0 +1,1 @@
+module.exports = require('@easymn/jest-config').babel;

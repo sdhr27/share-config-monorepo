@@ -1,0 +1,12 @@
+{
+  "name": "easymn",
+  "jest": [
+    {
+      "displayName": "foia-study",
+      "moduleNameMapper": {
+        "@/(.*)$": "<rootDir>/src/$1"
+      }
+    }
+  ],
+  "eslint": true
+}

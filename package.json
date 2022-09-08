@@ -1,0 +1,24 @@
+{
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf node_modules **/*/node_modules",
+    "sync": "pnpm -C ./packages/sync-config sync && pnpm lint",
+    "lint": "prettier -c --write **/jest.config.js **/.eslintrc.js"
+  },
+  "packageManager": "pnpm@7.8.0",
+  "devDependencies": {
+    "@easymn/eslint-config": "workspace:^0.0.0",
+    "@easymn/jest-config": "workspace:^0.0.0",
+    "@easymn/sync-config": "workspace:^0.0.0",
+    "typescript": "^4.3.5",
+    "@types/jest": "^27.0.0",
+    "@types/react": "^17.0.1",
+    "eslint": "^7.3.0",
+    "jest": "^27.0.6"
+  },
+  "dependencies": {
+    "react": "17.0.0",
+    "react-dom": "17.0.0"
+  }
+}

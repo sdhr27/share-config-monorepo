@@ -1,0 +1,24 @@
+{
+  "version": "0.0.0",
+  "private": true,
+  "main": "./sync.js",
+  "name": "@easymn/sync-config",
+  "scripts": {
+    "sync": "node sync.js"
+  },
+  "dependencies": {
+    "@easymn/eslint-config": "workspace:^0.0.0",
+    "@easymn/jest-config": "workspace:^0.0.0",
+    "eslint": "^7.3.0",
+    "glob": "^8.0.3",
+    "jest": "^27.0.6",
+    "fs-extra": "^10.1.0",
+    "child_process": "^1.0.2",
+    "@babel/generator": "^7.19.0",
+    "@babel/parser": "^7.19.0",
+    "@babel/traverse": "^7.19.0",
+    "@babel/types": "^7.19.0",
+    "typescript": "^4.3.5"
+  },
+  "devDependencies": {}
+}
