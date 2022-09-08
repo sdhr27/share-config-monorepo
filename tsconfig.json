@@ -20,7 +20,7 @@
     "strict": true,
     "strictNullChecks": true,
     "noUnusedParameters": true,
-    "type": ["node"],
+    "types": ["node"],
     "noUnusedLocals": true,
     "outDir": "out"
   }
