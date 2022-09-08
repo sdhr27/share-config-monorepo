@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf node_modules **/*/node_modules",
     "sync": "pnpm -C ./packages/sync-config sync && pnpm lint",
-    "lint": "prettier -c --write **/jest.config.js **/.eslintrc.js",
+    "lint": "prettier -c --write **/jest.config.js **/.eslintrc.js **/package.json",
     "test": "jest"
   },
   "packageManager": "pnpm@7.8.0",
