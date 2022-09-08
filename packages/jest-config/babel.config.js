@@ -1,20 +1,25 @@
-const babel1 = require('@babel/preset-env');
-const babel2 = require('@babel/preset-typescript');
-const babel3 = require('@babel/preset-react');
-const babel4 = require('@babel/plugin-syntax-dynamic-import');
-const PluginProposalClassProperties = require('@babel/plugin-proposal-class-properties');
-const babel6 = require('@babel/plugin-proposal-object-rest-spread');
-const babel7 = require('@babel/plugin-proposal-optional-chaining');
+const BabelPresetEnv = require('@babel/preset-env');
+const BabelPresetTypescript = require('@babel/preset-typescript');
+const BabelPresetReact = require('@babel/preset-react');
+const BabelPluginSyntaxDynamicImport = require('@babel/plugin-syntax-dynamic-import');
+const BabelPluginProposalClassProperties = require('@babel/plugin-proposal-class-properties');
+const BabelPluginProposalObjectResetSpread = require('@babel/plugin-proposal-object-rest-spread');
+const BabelPluginProposalOptionalChaining = require('@babel/plugin-proposal-optional-chaining');
 
 module.exports = {
   env: {
     test: {
       presets: [
-        [babel1, { targets: { node: 'current' } }],
-        [babel2],
-        [babel3, { runtime: 'automatic' }],
+        [BabelPresetEnv, { targets: { node: 'current' } }],
+        [BabelPresetTypescript],
+        [BabelPresetReact, { runtime: 'automatic' }],
       ],
-      plugins: [babel4, PluginProposalClassProperties, babel6, babel7],
+      plugins: [
+        BabelPluginSyntaxDynamicImport,
+        BabelPluginProposalClassProperties,
+        BabelPluginProposalObjectResetSpread,
+        BabelPluginProposalOptionalChaining,
+      ],
     },
   },
 };

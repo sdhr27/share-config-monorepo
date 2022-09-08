@@ -1,0 +1,13 @@
+{
+	"name": "exercise",
+	"scripts": {},
+	"version": "0.0.0",
+	"dependencies": {
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
+	},
+	"devDependencies": {
+		"@easymn/eslint-config": "workspace:^0.0.0",
+		"@easymn/jest-config": "workspace:^0.0.0"
+	}
+}

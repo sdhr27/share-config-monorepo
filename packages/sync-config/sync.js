@@ -1,11 +1,3 @@
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable no-param-reassign */
-// 1、手动复制粘贴项目到packages中
-// 2、写入package.json：devDependencies中加入pnpm依赖、更新eslint、jest核心依赖
-// 3、重装依赖
-// 4、配置文件修改
 const path = require('path');
 const fs = require('fs-extra');
 const glob = require('glob');
@@ -14,14 +6,15 @@ const traverse = require('@babel/traverse').default;
 const t = require('@babel/types');
 const generator = require('@babel/generator').default;
 
-const inner = ['eslint-config', 'jest-config'];
-const config = fs.readJsonSync(path.resolve(process.cwd(), './config.json'));
+const innerPkgs = ['eslint-config', 'jest-config'];
 // 读取非内置模组package.json
 const targets = glob
   .sync('../../packages/*/package.json')
-  .filter((p) => !inner.find((item) => p.includes(item)));
+  .filter((p) => !innerPkgs.find((item) => p.includes(item)));
 
-const [eslintPackageObj, jestPackageObj] = inner.map((item) => addName(item));
+const [eslintPackageObj, jestPackageObj] = innerPkgs.map((item) =>
+  getPacakgeObj(item),
+);
 
 targets.push('./package.json'); // 加入根目录package.json
 targets.forEach((target) => {
@@ -44,10 +37,8 @@ targets.forEach((target) => {
       devDependencies: {
         [eslintPackageObj.name]: `workspace:^${eslintPackageObj.version}`,
         [jestPackageObj.name]: `workspace:^${jestPackageObj.version}`,
-        typescript: eslintPackageObj.dependencies.typescript,
         ...curDevDependencies,
-        eslint: eslintPackageObj.dependencies.eslint,
-        jest: jestPackageObj.dependencies.jest,
+        // eslint: eslintPackageObj.dependencies.eslint,
       },
     },
     { spaces: '\t' },
@@ -56,74 +47,9 @@ targets.forEach((target) => {
   const eslintFile = packageJsonPath.replace('package.json', '.eslintrc.js');
   replaceConfig(eslintFile, eslintPackageObj.name);
 });
-// 修改/生成jest配置文件
-const jestConfigFile = path.resolve(process.cwd(), '../../jest.config.js');
-const jestBabelConfigFile = path.resolve(
-  process.cwd(),
-  '../../babel.config.js',
-);
 
-fs.ensureFile(jestConfigFile).then(() => {
-  const jestConfig = require(`@${config.name}/jest-config`).jest;
-  let finalConfig;
-  if (config.jest instanceof Array) {
-    const configjest = config.jest.map((item) => {
-      const { displayName } = item;
-      return JSON.parse(
-        String(JSON.stringify(item)).replace(
-          /<rootDir>/g,
-          `<rootDir>/packages/${displayName}`,
-        ),
-      );
-    });
-
-    finalConfig = {
-      projects: configjest.map((item) => {
-        for (const key in item) {
-          if (item.hasOwnProperty(key) && jestConfig.hasOwnProperty(key)) {
-            item[key] = {
-              ...jestConfig[key],
-              ...item[key],
-            };
-          }
-        }
-        return {
-          ...jestConfig,
-          ...item,
-        };
-      }),
-    };
-  } else if (config.jest) {
-    const originConfig = require(`@${config.name}/jest-config`).jest;
-
-    finalConfig = {
-      projects: [originConfig],
-    };
-  }
-  // 输出jest配置文件
-  fs.outputFileSync(
-    jestConfigFile,
-    `module.exports = ${JSON.stringify(finalConfig, null, '\t')}`,
-  );
-  targets.forEach((target) => {
-    const jestFile = path
-      .resolve(process.cwd(), target)
-      .replace('package.json', 'jest.config.js');
-    fs.outputFileSync(
-      jestFile,
-      `module.exports = ${JSON.stringify(finalConfig, null, '\t')}`,
-    );
-  });
-});
-
-fs.ensureFile(jestBabelConfigFile).then(() => {
-  fs.outputFileSync(
-    jestBabelConfigFile,
-    `module.exports = require('${jestPackageObj.name}').babel;`,
-  );
-});
-
-function addName(packageName) {
+// 获取package.json内容对象
+function getPacakgeObj(packageName) {
   const curPath = path.resolve(process.cwd(), `../${packageName}/package.json`);
 
   const curPackageObj = fs.readJsonSync(curPath);
@@ -131,7 +57,7 @@ function addName(packageName) {
   return curPackageObj;
 }
 
-// 修改配置文件
+// 修改eslint配置文件
 function replaceConfig(targetFile, targetConfig) {
   fs.ensureFile(targetFile).then(() => {
     const result = fs.readFileSync(targetFile, 'utf-8');
@@ -149,11 +75,6 @@ function replaceConfig(targetFile, targetConfig) {
         if (p.isProperty()) {
           if (p.node.key.name === 'extends') {
             p.node.value.elements = [t.stringLiteral(targetConfig)];
-            // if (
-            //   !p.node.value.elements.find((elm) => elm.value === targetConfig)
-            // ) {
-            //   p.node.value.elements.push(t.stringLiteral(targetConfig));
-            // }
           }
         }
       },

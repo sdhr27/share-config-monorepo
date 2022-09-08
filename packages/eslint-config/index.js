@@ -2,6 +2,8 @@
  * Shareable minimal ESLint config supporting both TypeScript (for source code,
  * tests, and scripts) and plain JavaScript (mostly for configuration files).
  */
+const path = require('path');
+
 module.exports = {
   overrides: [
     {
@@ -40,7 +42,6 @@ module.exports = {
         /* 更新后新增内容 */
         'react/jsx-props-no-spreading': 0, // 传入 props时 不可使用解构
         'react/state-in-constructor': 0,
-        'prefer-arrow-callback': [2, { allowNamedFunctions: true }],
         /* */
         'brace-style': [0],
         'no-console': [1],
@@ -54,7 +55,7 @@ module.exports = {
           1,
           { extensions: ['.js', 'tsx', 'ts'] },
         ],
-        'global-require': [1],
+        'global-require': [0],
         'import/prefer-default-export': 'off',
         'import/no-default-export': [0, 'camel-case'],
         'import/no-extraneous-dependencies': 0,
@@ -154,6 +155,19 @@ module.exports = {
         '@typescript-eslint/explicit-member-accessibility': 0,
         '@typescript-eslint/no-non-null-assertion': 0,
         'prettier/prettier': 0,
+        'import/no-dynamic-require': 0,
+        '@typescript-eslint/no-unused-vars': 1,
+      },
+      settings: {
+        react: {
+          version: 'detect',
+        },
+        'import/resolver': {
+          alias: {
+            map: [],
+            extensions: ['.ts', '.js', '.jsx'],
+          },
+        },
       },
     },
   ],

@@ -6,14 +6,13 @@
 module.exports = {
   clearMocks: true,
   testEnvironment: 'jsdom',
-  coveragePathIgnorePatterns: ['/node_modules/', '/assets/svgs/'],
+  coveragePathIgnorePatterns: ['/node_modules/'],
   setupFiles: [
     '<rootDir>/packages/jest-config/scripts/jest-setup-mock.js',
     '<rootDir>/packages/jest-config/node_modules/jest-canvas-mock',
   ],
   setupFilesAfterEnv: ['<rootDir>/packages/jest-config/scripts/jest-setup.ts'],
   moduleNameMapper: {
-    // '@/(.*)$': '<rootDir>/src/$1',
     '\\.(css|less)':
       '<rootDir>/packages/jest-config/node_modules/identity-obj-proxy/src/index.js',
   },
