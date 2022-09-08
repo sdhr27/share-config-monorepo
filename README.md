@@ -29,3 +29,21 @@ Run pnpm sync && pnpm install.
 | `pnpm clean`   | delete all node_modules | -                                   |
 | `pnpm install` | install all packages    | -                                   |
 | `pnpm test`    | run all jest tests      | -                                   |
+
+## 📒 Catalog Introduction
+
+```
+├── .vscode                       VScode configrations
+├── pacakges                      monorepo packages
+│   ├── eslint-config             eslint config package
+│       ├── index.js              the main config file
+│       ├── package.json          eslint package.json
+│   └── jest-config               jest config package
+│       └── scripts               jest enviroment support scirpts
+│       └── babel.config.js       jest babel configration
+│       └── jest.config.js        jest configration
+│       └── index.js              main entry
+│   └── sync-config               sync scripts package
+│   └── exercise                  An example
+└── tsconfig.json                 typescript config
+```

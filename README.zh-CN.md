@@ -29,3 +29,20 @@
 | `pnpm clean`   | 删除所有的 node_modules | -                            |
 | `pnpm install` | 安装所有依赖            | -                            |
 | `pnpm test`    | 运行所有 jest 测试      | -                            |
+
+## 📒 目录结构
+
+```
+├── .vscode                       VScode 配置
+├── pacakges                      monorepo packages
+│   ├── eslint-config             eslint config package
+│       ├── index.js              配置文件
+│   └── jest-config               jest config package
+│       └── scripts               jest enviroment 支撑 scirpts
+│       └── babel.config.js       jest babel 配置
+│       └── jest.config.js        jest 配置
+│       └── index.js              入口文件
+│   └── sync-config               sync脚本包
+│   └── exercise                  一个例子
+└── tsconfig.json                 typescript 配置
+```
