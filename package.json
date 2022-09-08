@@ -1,12 +1,13 @@
 {
   "version": "0.0.0",
-  "name": "configshare-monorepo",
+  "name": "share-config-template",
   "description": "Template for setting up a monorepo shares eslint and jest configrations",
   "private": true,
   "scripts": {
     "clean": "rm -rf node_modules **/*/node_modules",
     "sync": "pnpm -C ./packages/sync-config sync && pnpm lint",
-    "lint": "prettier -c --write **/jest.config.js **/.eslintrc.js"
+    "lint": "prettier -c --write **/jest.config.js **/.eslintrc.js",
+    "test": "jest"
   },
   "packageManager": "pnpm@7.8.0",
   "devDependencies": {
